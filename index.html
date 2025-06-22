@@ -16,7 +16,7 @@
             align-items: center;
             justify-content: flex-start; /* Align to start for content flow */
             min-height: 100vh; /* Full viewport height */
-            overflow: hidden; /* Hide scrollbars from floating hearts */
+            /* Removed overflow: hidden; to allow scrolling */
             position: relative; /* For absolute positioning of hearts */
         }
 
@@ -34,6 +34,7 @@
             display: flex;
             flex-direction: column;
             gap: 20px; /* Space between elements */
+            padding-bottom: 50px; /* Added some padding at the bottom to ensure content doesn't get cut off when scrolling */
         }
 
         h1 {
@@ -133,6 +134,9 @@
 
             // Set random initial position at the bottom of the screen
             const startX = Math.random() * window.innerWidth;
+            // Adjust the starting Y position to be relative to the entire document height if scrolling,
+            // or just below the current viewport if the intention is for them to float up from where they are visible.
+            // For a general "scrollable" page, starting from the bottom of the visible screen is typical for floating effects.
             heart.style.left = `${startX}px`;
             heart.style.bottom = '-50px'; // Start slightly below the viewport
 
