@@ -1,9 +1,182 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>My Cloudflare Page</title>
-  </head>
-  <body>
-    <h1>Hello from Cloudflare!</h1>
-  </body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Abby</title>
+    <style>
+        /* General styling for the body and container */
+        body {
+            font-family: 'Inter', sans-serif; /* Using Inter font as per instructions */
+            background-color: #FFC0CB; /* Pink background */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start; /* Align to start for content flow */
+            min-height: 100vh; /* Full viewport height */
+            overflow: hidden; /* Hide scrollbars from floating hearts */
+            position: relative; /* For absolute positioning of hearts */
+        }
+
+        .container {
+            position: relative; /* Ensures text and images are above hearts */
+            z-index: 10; /* Higher z-index than hearts */
+            background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent white background for content */
+            border-radius: 20px; /* Rounded corners */
+            padding: 20px;
+            margin: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Soft shadow */
+            text-align: center;
+            width: 90%; /* Responsive width */
+            max-width: 600px; /* Max width for larger screens */
+            display: flex;
+            flex-direction: column;
+            gap: 20px; /* Space between elements */
+        }
+
+        h1 {
+            color: #E91E63; /* Deep pink color for text */
+            font-size: 2.5em; /* Large font size */
+            margin-top: 0;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+            word-break: break-word; /* Ensure text breaks on small screens */
+        }
+
+        /* Image grid styling */
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Responsive grid columns */
+            gap: 15px; /* Space between images */
+            margin-top: 20px;
+        }
+
+        .image-grid img {
+            width: 100%; /* Make images fill their grid cell */
+            height: auto; /* Maintain aspect ratio */
+            border-radius: 15px; /* Rounded corners for images */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow for images */
+            transition: transform 0.3s ease; /* Smooth hover effect */
+        }
+
+        .image-grid img:hover {
+            transform: scale(1.03); /* Slightly enlarge on hover/tap */
+        }
+
+        /* Floating hearts styling */
+        .heart {
+            position: absolute;
+            font-size: 2em; /* Size of hearts */
+            color: #FF69B4; /* Hot pink color */
+            pointer-events: none; /* Hearts should not interfere with clicks */
+            animation: floatUp 6s ease-in forwards; /* Animation for floating up and fading */
+            opacity: 0; /* Start invisible */
+            z-index: 1; /* Lower z-index than content */
+        }
+
+        /* Keyframes for the floating heart animation */
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) scale(0.5);
+                opacity: 0;
+            }
+            20% {
+                opacity: 1; /* Fade in */
+            }
+            80% {
+                transform: translateY(-80vh) scale(1.2); /* Move up and slightly enlarge */
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) scale(1.5);
+                opacity: 0; /* Fade out */
+            }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8em; /* Smaller font size on very small screens */
+            }
+            .container {
+                width: 95%; /* Wider on smaller screens */
+                margin: 10px;
+            }
+            .image-grid {
+                grid-template-columns: 1fr; /* Single column layout on small mobile */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>I love you Abby! ❤️</h1>
+
+        <div class="image-grid">
+            <!-- IMPORTANT: Replace these placeholder image URLs with your actual image URLs.
+                 Since the files you provided are .MOV video files, they cannot be directly
+                 used as image sources. You'll need to convert them to images (e.g., .jpg, .png)
+                 or upload actual image files and link them here.
+                 For example: <img src="your_image_1.jpg" alt="Abby photo 1">
+            -->
+            <img src="https://placehold.co/300x300/FFC0CB/FFFFFF?text=Photo+1" onerror="this.onerror=null;this.src='https://placehold.co/300x300/FFC0CB/FFFFFF?text=Image+Load+Error';" alt="Placeholder for Abby's photo 1">
+            <img src="https://placehold.co/300x300/FFC0CB/FFFFFF?text=Photo+2" onerror="this.onerror=null;this.src='https://placehold.co/300x300/FFC0CB/FFFFFF?text=Image+Load+Error';" alt="Placeholder for Abby's photo 2">
+            <img src="https://placehold.co/300x300/FFC0CB/FFFFFF?text=Photo+3" onerror="this.onerror=null;this.src='https://placehold.co/300x300/FFC0CB/FFFFFF?text=Image+Load+Error';" alt="Placeholder for Abby's photo 3">
+            <img src="https://placehold.co/300x300/FFC0CB/FFFFFF?text=Photo+4" onerror="this.onerror=null;this.src='https://placehold.co/300x300/FFC0CB/FFFFFF?text=Image+Load+Error';" alt="Placeholder for Abby's photo 4">
+            <img src="https://placehold.co/300x300/FFC0CB/FFFFFF?text=Photo+5" onerror="this.onerror=null;this.src='https://placehold.co/300x300/FFC0CB/FFFFFF?text=Image+Load+Error';" alt="Placeholder for Abby's photo 5">
+        </div>
+    </div>
+
+    <script>
+        // Function to create and animate a single heart
+        function createHeart() {
+            const heart = document.createElement('span');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️'; // Unicode heart emoji
+
+            // Set random initial position at the bottom of the screen
+            const startX = Math.random() * window.innerWidth;
+            heart.style.left = `${startX}px`;
+            heart.style.bottom = '-50px'; // Start slightly below the viewport
+
+            document.body.appendChild(heart);
+
+            // Remove heart after its animation completes to prevent DOM clutter
+            heart.addEventListener('animationend', () => {
+                heart.remove();
+            });
+        }
+
+        // Generate hearts at regular intervals
+        let heartInterval;
+        function startHeartGeneration() {
+             // Clear any existing interval to prevent duplicates if function is called multiple times
+            if (heartInterval) {
+                clearInterval(heartInterval);
+            }
+            heartInterval = setInterval(createHeart, 500); // Create a new heart every 500ms
+        }
+
+        // Stop heart generation (optional, useful if you want to control it)
+        function stopHeartGeneration() {
+            clearInterval(heartInterval);
+        }
+
+        // Start generating hearts when the page loads
+        window.onload = function() {
+            startHeartGeneration();
+        };
+
+        // Handle window resizing: Adjust heart generation if needed, though CSS animation handles most.
+        // The main point here is to ensure the layout remains responsive.
+        window.onresize = function() {
+            // No specific action needed for heart generation on resize, as their positions
+            // are calculated randomly based on current window.innerWidth when created.
+            // The responsive CSS will handle the rest of the layout.
+        };
+
+    </script>
+</body>
 </html>
